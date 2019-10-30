@@ -65,7 +65,7 @@ void requester_thread_func(void *a){
 	string track_number_in;
 
   info_lock.lock();
-	while( getline(thread_file, track_number_in) ){
+  while( getline(thread_file, track_number_in) ){
 		DiskEntry in;
 		in.disk_number = t_info->thread_number;
 		info_lock.unlock();
@@ -84,9 +84,9 @@ void requester_thread_func(void *a){
 		// not on queue already and it is not max size. Free to push on list.
 		sequence_queue.push_front(in);
 		t_info->on_queue = true;
-		print_request(in.disk_number, in.track);
+	  print_request(in.disk_number, in.track);
     info_lock.unlock();
-		main_thread.signal();
+    main_thread.signal();
     info_lock.lock();
 	}
   // When the thread dies.
